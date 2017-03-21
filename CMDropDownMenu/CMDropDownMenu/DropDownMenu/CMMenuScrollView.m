@@ -108,40 +108,63 @@
 {
     [super layoutSubviews];
     
-    //1 布局titleButton
-    NSInteger i = 0;
-    CGFloat maxWidth = 0;
-    CGFloat baseWidth = self.bounds.size.width / 4.0;
-    if (self.titles.count < 4) {
-        baseWidth = self.bounds.size.width / self.titles.count;
-    }
-    for (UIView *view in self.subviews) {
-        if ([view isKindOfClass:[CMButton class]]) {
-            
-            CMButton *button = (CMButton *)view;
-            CGFloat titleWidth = [self.titleWidths[i] floatValue];
-            
-            //2.1 定义变量
-            CGFloat x = 0;
-            CGFloat y = 0;
-            CGFloat width = titleWidth + 20;
-            if (width < baseWidth) {
-                width = baseWidth;
-            }
-            CGFloat height = self.bounds.size.height;
-            
-            //2.2 计算
-            x = maxWidth;
-            button.frame = CGRectMake(x, y, width, height);
-            [button layoutSubviews];
-            
-            //2.3 flag
-            i++;
-            maxWidth = maxWidth + width + 1;
+    
+    if(self.menuBarScrollable){
+        //1 布局titleButton
+        NSInteger i = 0;
+        CGFloat maxWidth = 0;
+        CGFloat margin = 1;
+        CGFloat baseWidth = self.bounds.size.width / 4.0;
+        if (self.titles.count < 4) {
+            baseWidth = self.bounds.size.width / self.titles.count;
         }
+        for (UIView *view in self.subviews) {
+            if ([view isKindOfClass:[CMButton class]]) {
+                
+                CMButton *button = (CMButton *)view;
+                CGFloat titleWidth = [self.titleWidths[i] floatValue];
+                
+                //2.1 定义变量
+                CGFloat x = 0;
+                CGFloat y = 0;
+                CGFloat width = titleWidth + 20;
+                if (width < baseWidth) {
+                    width = baseWidth;
+                }
+                CGFloat height = self.bounds.size.height;
+                
+                //2.2 计算
+                x = maxWidth;
+                button.frame = CGRectMake(x, y, width, height);
+                [button layoutSubviews];
+                
+                //2.3 flag
+                i++;
+                maxWidth = maxWidth + width + margin;
+            }
+        }
+        
+        //2 内容宽度
+        self.contentSize = CGSizeMake(maxWidth, self.bounds.size.height);
+        
     }
-    //2 内容宽度
-    self.contentSize = CGSizeMake(maxWidth, self.bounds.size.height);
+    //平分按钮
+    else{
+        NSInteger i = 0;
+        CGFloat margin = 1;
+        CGFloat width = (self.bounds.size.width  - (self.titles.count - 1) * margin) / self.titles.count;
+        for (UIView *view in self.subviews) {
+            
+            if ([view isKindOfClass:[CMButton class]]) {
+             
+                CMButton *button = (CMButton *)view;
+                button.frame = CGRectMake(i * (width + margin), 0, width, self.bounds.size.height);
+                i++;
+            }
+        }
+        
+    }
+
 }
 
 

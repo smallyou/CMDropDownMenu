@@ -99,6 +99,7 @@
     
 
     
+    //CMDropDownMenu *dropDownMenu = [[CMDropDownMenu alloc]initWithMenuBarScrollable:NO];  //默认是NO 不可滚动
     CMDropDownMenu *dropDownMenu = [[CMDropDownMenu alloc]init];
     self.dropDownMenu = dropDownMenu;
     
@@ -107,6 +108,7 @@
     dropDownMenu.menuTitleFont = [UIFont systemFontOfSize:16.0];    //在赋数据源之前设置，如果为空或不传，则默认是16号字体
     dropDownMenu.firstMenuTitleColor = [UIColor blackColor];  //在赋数据源之前设置,如果为空或不传，则默认是黑色的
     dropDownMenu.firstMenuTitleFont = [UIFont systemFontOfSize:13.0]; //在赋数据源之前设置，如果为空或不传，则默认是13号字体
+    
     
     //数据源配置
     dropDownMenu.titleDatas = @[item1,item2, item3, item4];

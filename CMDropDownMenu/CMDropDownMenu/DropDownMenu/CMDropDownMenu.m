@@ -25,13 +25,25 @@
 /**上一次选中的路径*/
 @property(nonatomic,strong) CMDropMenuItem *lastSelectedPath;
 
+/**菜单栏是否可以滚动 --- 默认为NO*/
+@property(nonatomic,assign) BOOL menuTarScrollable;
 
 @end
 
 
 @implementation CMDropDownMenu
 #pragma mark - 懒加载
-
+/**用来配置菜单栏是否可以滚动*/
+-(instancetype)initWithMenuBarScrollable:(BOOL)scrollable
+{
+    if (self = [super init]) {
+        
+        self.menuTarScrollable = scrollable;
+        [self setup];
+        
+    }
+    return self;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -64,6 +76,7 @@
 {
     //1 scorllView
     CMMenuScrollView *scrollView = [[CMMenuScrollView alloc]init];
+    scrollView.menuBarScrollable = self.menuTarScrollable;
     scrollView.delegate = self;
     self.scrollView = scrollView;
     [self addSubview:scrollView];
@@ -104,6 +117,7 @@
     if (self.menuTitleFont) {
         self.scrollView.menuTitleFont = self.menuTitleFont;
     }
+    
     
     //赋值
     self.scrollView.titles = arrayM;

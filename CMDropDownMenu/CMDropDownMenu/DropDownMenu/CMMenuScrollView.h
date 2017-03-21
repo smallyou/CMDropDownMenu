@@ -33,6 +33,8 @@
 
 
 #pragma mark - 配置属性
+/**菜单栏是否可以滚动 -- 是否平分宽度*/
+@property(nonatomic,assign) BOOL menuBarScrollable;
 /**菜单栏中的菜单文字 字体*/
 @property(nonatomic,strong) UIFont *menuTitleFont;
 /**菜单栏中的菜单文字 颜色*/

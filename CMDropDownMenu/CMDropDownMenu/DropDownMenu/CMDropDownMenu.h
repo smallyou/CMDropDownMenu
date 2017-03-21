@@ -28,6 +28,8 @@
 /**代理*/
 @property(nonatomic,weak) id<CMDropDownMenuDelegate> delegate;
 
+/**用来配置菜单栏是否可以滚动*/
+-(instancetype)initWithMenuBarScrollable:(BOOL)scrollable;
 
 #pragma mark - 配置属性
 
