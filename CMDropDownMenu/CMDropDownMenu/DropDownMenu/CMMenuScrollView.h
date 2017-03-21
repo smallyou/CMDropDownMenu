@@ -31,4 +31,13 @@
 /**当前选中的菜单按钮*/
 @property(nonatomic,strong, readonly) CMButton *selectedButton;
 
+
+#pragma mark - 配置属性
+/**菜单栏中的菜单文字 字体*/
+@property(nonatomic,strong) UIFont *menuTitleFont;
+/**菜单栏中的菜单文字 颜色*/
+@property(nonatomic,strong) UIColor *menuTitleColor;
+
+
+
 @end

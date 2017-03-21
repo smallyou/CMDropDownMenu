@@ -26,4 +26,17 @@
 /**上次选中的最终路径*/
 @property(nonatomic,strong) CMDropMenuItem *lastSelectedItem;
 
+
+#pragma mark - 配置属性
+
+/**一级菜单的文字  字体*/
+@property(nonatomic,strong) UIFont *firstMenuTitleFont;
+/**以及菜单的文字  颜色*/
+@property(nonatomic,strong) UIColor *firstMenuTitleColor;
+
+/**二级菜单的文字  字体*/
+@property(nonatomic,strong) UIFont *secondMenuTitleFont;
+/**二级菜单的文字  颜色*/
+@property(nonatomic,strong) UIColor *secondMenuTitleColor;
+
 @end

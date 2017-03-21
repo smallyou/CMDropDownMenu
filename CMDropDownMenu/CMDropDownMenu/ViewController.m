@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1.0];
 
     //设置UI
     [self setupUI];
@@ -100,6 +101,14 @@
     
     CMDropDownMenu *dropDownMenu = [[CMDropDownMenu alloc]init];
     self.dropDownMenu = dropDownMenu;
+    
+    //可选属性配置
+    dropDownMenu.menuTitleColor= [UIColor blackColor];    //在赋数据源之前设置,如果为空或不传，则默认是黑色的
+    dropDownMenu.menuTitleFont = [UIFont systemFontOfSize:16.0];    //在赋数据源之前设置，如果为空或不传，则默认是16号字体
+    dropDownMenu.firstMenuTitleColor = [UIColor blackColor];  //在赋数据源之前设置,如果为空或不传，则默认是黑色的
+    dropDownMenu.firstMenuTitleFont = [UIFont systemFontOfSize:13.0]; //在赋数据源之前设置，如果为空或不传，则默认是13号字体
+    
+    //数据源配置
     dropDownMenu.titleDatas = @[item1,item2, item3, item4];
     dropDownMenu.delegate = self;
     [self.view addSubview:dropDownMenu];

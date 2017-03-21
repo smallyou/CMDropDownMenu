@@ -53,7 +53,8 @@
 
 - (void)setupUI
 {
-    self.backgroundColor = [UIColor whiteColor];
+    //self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
     self.showsVerticalScrollIndicator = NO;
     self.showsHorizontalScrollIndicator = NO;
 }
@@ -75,7 +76,8 @@
     
     //根据数据源添加菜单
     NSInteger tag = 2000;
-    UIFont *font = [UIFont systemFontOfSize:16.0];
+    UIFont *font = (self.menuTitleFont == nil?[UIFont systemFontOfSize:16.0]:self.menuTitleFont);
+    UIColor *color = (self.menuTitleColor == nil?[UIColor blackColor]:self.menuTitleColor);
     for (NSString *title in titles) {
         
         //1 计算
@@ -85,7 +87,7 @@
         //2 创建按钮
         CMButton *button = [[CMButton alloc]init];
         button.titleLabel.font = font;
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitleColor:color forState:UIControlStateNormal];
         [button setTitle:title forState:UIControlStateNormal];
         button.menuTitle = title;   //记录，供之后恢复使用
         [button setImage:[UIImage imageNamed:@"resource.bundle/arrow_down"] forState:UIControlStateNormal];
@@ -134,7 +136,7 @@
             
             //2.3 flag
             i++;
-            maxWidth = maxWidth + width;
+            maxWidth = maxWidth + width + 1;
         }
     }
     //2 内容宽度

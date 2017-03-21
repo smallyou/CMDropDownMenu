@@ -97,6 +97,14 @@
         [arrayM addObject:item.title];
     }
     
+    //在赋数据源之前设置属性
+    if (self.menuTitleColor) {
+        self.scrollView.menuTitleColor = self.menuTitleColor;
+    }
+    if (self.menuTitleFont) {
+        self.scrollView.menuTitleFont = self.menuTitleFont;
+    }
+    
     //赋值
     self.scrollView.titles = arrayM;
     
@@ -206,6 +214,12 @@
     
     //2 创建子菜单蒙版
     CMSubMenuCoverView *coverView = [[CMSubMenuCoverView alloc]init];
+    
+    //3 设置属性
+    coverView.firstMenuTitleFont = self.firstMenuTitleFont;
+    coverView.firstMenuTitleColor = self.firstMenuTitleColor;
+    coverView.secondMenuTitleFont = self.secondMenuTitleFont;
+    coverView.secondMenuTitleColor = self.secondMenuTitleColor;
     coverView.delegate = self;
     coverView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     coverView.lastSelectedItem = self.scrollView.selectedButton.selectedItem;   //传递上次选中的路径给菜单栏

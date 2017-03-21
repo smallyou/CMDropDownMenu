@@ -182,7 +182,8 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
         if (cell == nil) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
-            cell.textLabel.font = [UIFont systemFontOfSize:13.0];
+            cell.textLabel.font = (self.firstMenuTitleFont == nil?[UIFont systemFontOfSize:13.0]:self.firstMenuTitleFont);
+            cell.textLabel.textColor = (self.firstMenuTitleColor == nil?[UIColor blackColor]:self.firstMenuTitleColor);
             cell.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
             cell.selectedBackgroundView = [[UIImageView alloc]initWithImage:[CMButton cm_imageWithColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0]]];
         }
@@ -217,7 +218,8 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
         if (cell == nil) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
-            cell.textLabel.font = [UIFont systemFontOfSize:13.0];
+            cell.textLabel.font = (self.secondMenuTitleFont == nil?[UIFont systemFontOfSize:13.0]:self.secondMenuTitleFont);
+            cell.textLabel.textColor = (self.secondMenuTitleColor == nil?[UIColor blackColor]:self.secondMenuTitleColor);
             cell.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
             cell.accessoryView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"resource.bundle/ic_bookbuild_right"]];
             cell.accessoryView.hidden = YES;
