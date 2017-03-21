@@ -105,7 +105,10 @@
     //1 布局titleButton
     NSInteger i = 0;
     CGFloat maxWidth = 0;
-    CGFloat baseWidth = self.bounds.size.width / 4.0;   //至少放4个
+    CGFloat baseWidth = self.bounds.size.width / 4.0;
+    if (self.titles.count < 4) {
+        baseWidth = self.bounds.size.width / self.titles.count;
+    }
     for (UIView *view in self.subviews) {
         if ([view isKindOfClass:[CMButton class]]) {
             

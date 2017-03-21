@@ -100,7 +100,7 @@
     
     CMDropDownMenu *dropDownMenu = [[CMDropDownMenu alloc]init];
     self.dropDownMenu = dropDownMenu;
-    dropDownMenu.titleDatas = @[item1,item2,item3,item4];
+    dropDownMenu.titleDatas = @[item1,item2];
     dropDownMenu.delegate = self;
     [self.view addSubview:dropDownMenu];
     
