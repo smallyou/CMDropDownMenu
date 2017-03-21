@@ -87,7 +87,7 @@
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button setTitle:title forState:UIControlStateNormal];
         button.menuTitle = title;   //记录，供之后恢复使用
-        [button setImage:[UIImage imageNamed:@"arrow_down"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"resource.bundle/arrow_down"] forState:UIControlStateNormal];
         button.tag = tag;
         [button addTarget:self action:@selector(menuBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
