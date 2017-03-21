@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class CMDropMenuItem,CMDropDownMenu;
+#import "CMDropMenuItem.h"
+#import "CMMenuScrollView.h"
+
+@class CMDropDownMenu;
 
 @protocol CMDropDownMenuDelegate <NSObject>
 
@@ -24,5 +27,24 @@
 
 /**代理*/
 @property(nonatomic,weak) id<CMDropDownMenuDelegate> delegate;
+
+
+#pragma mark - 配置属性
+
+/**菜单栏中的菜单文字 字体*/
+@property(nonatomic,strong) UIFont *menuTitleFont;
+/**菜单栏中的菜单文字 颜色*/
+@property(nonatomic,strong) UIColor *menuTitleColor;
+
+/**一级菜单的文字  字体*/
+@property(nonatomic,strong) UIFont *firstMenuTitleFont;
+/**以及菜单的文字  颜色*/
+@property(nonatomic,strong) UIColor *firstMenuTitleColor;
+
+/**二级菜单的文字  字体*/
+@property(nonatomic,strong) UIFont *secondMenuTitleFont;
+/**二级菜单的文字  颜色*/
+@property(nonatomic,strong) UIColor *secondMenuTitleColor;
+
 
 @end

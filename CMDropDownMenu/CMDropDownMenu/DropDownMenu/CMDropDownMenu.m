@@ -7,8 +7,6 @@
 //
 
 #import "CMDropDownMenu.h"
-#import "CMDropMenuItem.h"
-#import "CMMenuScrollView.h"
 #import "CMSubMenuCoverView.h"
 
 @interface CMDropDownMenu() <CMMenuScrollViewDelegate, CMSubMenuCoverViewDelegate,UIGestureRecognizerDelegate>
@@ -18,6 +16,8 @@
 @property(nonatomic,weak) CMMenuScrollView *scrollView;
 /**点击菜单栏后展开的子菜单蒙版*/
 @property(nonatomic,weak) CMSubMenuCoverView *coverView;
+/**菜单栏底部的分割线*/
+@property(nonatomic,weak) UIView *bottomSepartorView;
 
 #pragma mark - 记录标签
 /**菜单栏选中的序列*/
@@ -67,14 +67,22 @@
     scrollView.delegate = self;
     self.scrollView = scrollView;
     [self addSubview:scrollView];
+    
+    //2 创建分割线
+    UIView *bottomSepartorView = [[UIView alloc]init];
+    bottomSepartorView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
+    self.bottomSepartorView = bottomSepartorView;
+    [self addSubview:bottomSepartorView];
 }
 
 /**布局子控件*/
 - (void)layoutSubviews
 {
     //1 布局scrollView
-    self.scrollView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+    self.scrollView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height - 1);
     
+    //2 布局分割线
+    self.bottomSepartorView.frame = CGRectMake(0, self.bounds.size.height - 1, self.bounds.size.width, 1);
 }
 
 #pragma mark - 事件监听

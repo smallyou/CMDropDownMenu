@@ -190,19 +190,21 @@
         //取出模型
         CMDropMenuItem *item = self.itemDatas[indexPath.row];
         
+        //设置选中的状态
         if (self.subTableView == nil) {
             
             cell.accessoryView = item.isSelected?[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"resource.bundle/ic_bookbuild_right"]]:nil;
             
         }else{
             
-            if (item.isSelected) {
-                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-            }else{
-                [tableView deselectRowAtIndexPath:indexPath animated:NO];
-            }
+            cell.accessoryView = nil;
             
-            
+        }
+        
+        if (item.isSelected) {
+            [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }else{
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
         }
         
         cell.textLabel.text = item.title;

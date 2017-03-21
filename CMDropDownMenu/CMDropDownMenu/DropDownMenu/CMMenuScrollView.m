@@ -18,6 +18,7 @@
 /**当前选中的菜单按钮*/
 @property(nonatomic,strong) CMButton *selectedButton;
 
+
 @end
 
 @implementation CMMenuScrollView
@@ -95,6 +96,9 @@
         //3 tag
         tag++;
     }
+    
+
+    
     
 }
 
