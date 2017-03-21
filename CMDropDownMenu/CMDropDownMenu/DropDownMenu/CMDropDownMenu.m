@@ -221,7 +221,7 @@
     [self updateSelectedFlag:self.lastSelectedPath flag:NO];
     [self updateSelectedFlag:item flag:YES];
     self.lastSelectedPath = item;
-    
+    self.scrollView.selectedButton.imageView.transform = CGAffineTransformIdentity;
     
     //移除子菜单
     if (self.coverView) {
