@@ -133,6 +133,7 @@
             //2.2 计算
             x = maxWidth;
             button.frame = CGRectMake(x, y, width, height);
+            [button layoutSubviews];
             
             //2.3 flag
             i++;
