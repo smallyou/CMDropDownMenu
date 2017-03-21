@@ -160,6 +160,7 @@
                 CMButton *button = (CMButton *)view;
                 button.frame = CGRectMake(i * (width + margin), 0, width, self.bounds.size.height);
                 i++;
+                [button layoutSubviews];
             }
         }
         
