@@ -241,6 +241,21 @@
         [button setTitle:item.title forState:UIControlStateNormal];
     }
     
+    //如果标题栏发生变化，需要滚动菜单栏
+    //---1 获取当前选中菜单按钮的最大x轴
+    CGFloat maxX = CGRectGetMaxX(self.scrollView.selectedButton.frame);
+    if (maxX > self.scrollView.bounds.size.width) {
+        //说明已经超出了右边界
+        [self.scrollView setContentOffset:CGPointMake(maxX - self.scrollView.bounds.size.width, 0) animated:YES];
+    }else if (self.scrollView.selectedButton.frame.origin.x < 0){
+        //说明已经超出了左边界
+        [self.scrollView setContentOffset:CGPointMake(-self.scrollView.selectedButton.frame.origin.x, 0) animated:YES];
+    }
+    else{
+        [self.scrollView setContentOffset:CGPointZero animated:YES];
+    }
+    
+    
     //不存在子菜单，直接通知代理
     if ([self.delegate respondsToSelector:@selector(dropDownMenu:didChildItemSelected:)]) {
         [self.delegate dropDownMenu:self didChildItemSelected:item];
