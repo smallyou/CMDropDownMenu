@@ -184,8 +184,6 @@
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
             cell.textLabel.font = [UIFont systemFontOfSize:13.0];
             cell.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
-            cell.accessoryView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ic_bookbuild_right"]];
-            cell.accessoryView.hidden = YES;
             cell.selectedBackgroundView = [[UIImageView alloc]initWithImage:[CMButton cm_imageWithColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0]]];
         }
         
@@ -194,7 +192,7 @@
         
         if (self.subTableView == nil) {
             
-            cell.accessoryView.hidden = !item.isSelected;
+            cell.accessoryView = item.isSelected?[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ic_bookbuild_right"]]:nil;
             
         }else{
             
