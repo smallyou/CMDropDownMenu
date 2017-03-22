@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class CMDropMenuItem;
 
 @interface CMDropMenuItem : NSObject
 
@@ -31,8 +32,19 @@
 @property(nonatomic,assign) BOOL isDefaultItem;
 
 
-
+/**快速创建菜单项*/
 + (instancetype)itemWithSuperItem:(CMDropMenuItem *)superItem Id:(NSInteger)Id title:(NSString *)title subItems:(NSArray <CMDropMenuItem *> *)subItems;
 
+/**通过字典创建模型*/
++ (instancetype)itemWithKeyValue:(NSDictionary *)dictionary;
+
+/**通过字典数组创建菜单*/
++ (NSArray<CMDropMenuItem *> *)itemsWithKeyValueArray:(NSArray<NSDictionary *> *)array;
+
+/**通过plist文件创建菜单*/
++ (NSArray<CMDropMenuItem *> *)itemsWithContentsOfFile:(NSString *)path;
+
+/**通过NSData创建菜单*/
++ (NSArray<CMDropMenuItem *> *)itemWithData:(NSData *)data;
 
 @end

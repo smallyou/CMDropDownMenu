@@ -117,6 +117,12 @@
     
     
     
+    
+    
+    NSArray *array = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"menu1.plist" ofType:nil]];
+    
+    
+    
     self.title = @"下拉列表菜单";
     
 }
