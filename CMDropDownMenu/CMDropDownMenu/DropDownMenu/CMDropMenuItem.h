@@ -35,6 +35,9 @@
 /**快速创建菜单项*/
 + (instancetype)itemWithSuperItem:(CMDropMenuItem *)superItem Id:(NSInteger)Id title:(NSString *)title subItems:(NSArray <CMDropMenuItem *> *)subItems;
 
+/**快速创建菜单项--忽略superItem，程序自动识别*/
++ (instancetype)itemWithId:(NSInteger)Id title:(NSString *)title subItems:(NSArray<CMDropMenuItem *> *)subItems;
+
 /**通过字典创建模型*/
 + (instancetype)itemWithKeyValue:(NSDictionary *)dictionary;
 
@@ -46,5 +49,28 @@
 
 /**通过NSData创建菜单*/
 + (NSArray<CMDropMenuItem *> *)itemWithData:(NSData *)data;
+
+
+
+#pragma mark - 工具方法
+/**
+    当字典中的key和模型中的不一致的时候，用来标明
+    字典格式: 字典中的key:模型的key   eg   @{ @"subItem":@"subItems"}
+ */
++ (void)cm_setupReplacedKeyFromPropertyName:(NSDictionary *)dictionary;
+
+/**
+    当模型中有个数组，数组中又包含其他的模型的时候
+    字典格式： 数组的名称:对应的模型的类型    eg @{@"subItem":@"CMDropMenuItem"}
+ */
++ (void)cm_setupObjectClassInArray:(NSDictionary *)dictionary;
+
+
+#pragma mark - 私有工具
+/**获取当前类的属性名称数组*/
+- (NSArray *)cm_allPropertyNames;
+
+/**设置属性*/
+- (void)cm_setValue:(id)value forKey:(NSString *)key;
 
 @end
