@@ -23,6 +23,7 @@
 /**子菜单*/
 @property(nonatomic,strong) NSArray<CMDropMenuItem *> *subItems;
 
+@property(nonatomic,strong) CMDropMenuItem *test;
 
 #pragma mark - flag
 /**是否选中标识*/

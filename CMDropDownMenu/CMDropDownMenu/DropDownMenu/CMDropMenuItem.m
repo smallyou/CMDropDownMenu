@@ -64,6 +64,7 @@ NSDictionary *_objectClassInArrayDict;
         //--2 判断当前字典的key是否在模型中存在对应的同名属性
         if ([propertys containsObject:keyNew]) {
          
+            //赋值
             [item cm_setValue:obj forKey:keyNew];
             
         }
@@ -133,15 +134,32 @@ NSDictionary *_objectClassInArrayDict;
     return allNames;
 }
 
+/**获取当前类的属性对应的属性类型*/
++ (NSString *)perpertyTypeWithName:(NSString *)name
+{
+    //运行时获取当前类的属性
+    objc_property_t property = class_getProperty(self, [name UTF8String]);
+    
+    //获取属性类型名称
+    const char *types = property_getAttributes(property);
+    
+    
+    //返回
+    return [NSString stringWithUTF8String:types];
+}
+
+
 /**设置属性*/
 - (void)cm_setValue:(id)value forKey:(NSString *)key
 {
     //判断值的类型
     if ([value isKindOfClass:[NSNumber class]] || [value isKindOfClass:[NSString class]]) {
-     
+        //如果是基本数据类型
+        
         [self setValue:value forKey:key];
         
     }else if([value isKindOfClass:[NSArray class]]){
+        //如果是数组
         
         //转换
         NSArray *array = (NSArray *)value;
@@ -164,6 +182,10 @@ NSDictionary *_objectClassInArrayDict;
         
         
     }else if ([value isKindOfClass:[NSDictionary class]]){
+        //如果是字典
+        
+        //--1 根据当前的属性名称key获取当前属性的类型
+        NSString *type = [CMDropMenuItem perpertyTypeWithName:key];
         
         NSDictionary *itemDict = (NSDictionary *)value;
         CMDropMenuItem *item = [CMDropMenuItem itemWithKeyValue:itemDict];
@@ -171,6 +193,7 @@ NSDictionary *_objectClassInArrayDict;
 
         [self setValue:item forKey:key];
     }
+    
 }
 
 

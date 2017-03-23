@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		543F89511E82CA9D00E56771 /* menu1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 543F89501E82CA9D00E56771 /* menu1.plist */; };
+		F7705D661E83AE3800DD6641 /* NSObject+CMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F7705D651E83AE3800DD6641 /* NSObject+CMExtension.m */; };
 		F7A3CA0B1E7B81F00025D8A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A3CA0A1E7B81F00025D8A6 /* main.m */; };
 		F7A3CA0E1E7B81F00025D8A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A3CA0D1E7B81F00025D8A6 /* AppDelegate.m */; };
 		F7A3CA111E7B81F00025D8A6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A3CA101E7B81F00025D8A6 /* ViewController.m */; };
@@ -24,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		543F89501E82CA9D00E56771 /* menu1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = menu1.plist; sourceTree = "<group>"; };
+		F7705D641E83AE3800DD6641 /* NSObject+CMExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CMExtension.h"; sourceTree = "<group>"; };
+		F7705D651E83AE3800DD6641 /* NSObject+CMExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CMExtension.m"; sourceTree = "<group>"; };
 		F7A3CA061E7B81F00025D8A6 /* CMDropDownMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CMDropDownMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7A3CA0A1E7B81F00025D8A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F7A3CA0C1E7B81F00025D8A6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 				F7A3CA2D1E7BCBD00025D8A6 /* CMSubMenuCoverView.m */,
 				F7A3CA471E7F6A350025D8A6 /* CMButton.h */,
 				F7A3CA481E7F6A350025D8A6 /* CMButton.m */,
+				F7705D641E83AE3800DD6641 /* NSObject+CMExtension.h */,
+				F7705D651E83AE3800DD6641 /* NSObject+CMExtension.m */,
 			);
 			path = DropDownMenu;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 				F7A3CA0E1E7B81F00025D8A6 /* AppDelegate.m in Sources */,
 				F7A3CA0B1E7B81F00025D8A6 /* main.m in Sources */,
 				F7A3CA2E1E7BCBD00025D8A6 /* CMSubMenuCoverView.m in Sources */,
+				F7705D661E83AE3800DD6641 /* NSObject+CMExtension.m in Sources */,
 				F7A3CA281E7B85F20025D8A6 /* CMDropMenuItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
