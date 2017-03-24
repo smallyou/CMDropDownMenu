@@ -10,8 +10,7 @@
 
 @interface NSObject (CMExtension)
 
-/**字典转模型*/
-+ (instancetype)cm_objectWithKeyValue:(NSDictionary *)dict;
+
 
 
 

@@ -76,6 +76,10 @@
                                                           @"subItem":@"subItems"
                                                           }];
     
+    [CMDropMenuItem cm_setupObjectClassInArray:@{
+                                                 @"subItem":@"CMDropMenuItem"
+                                                 }];
+    
     return [CMDropMenuItem itemsWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"menu1.plist" ofType:nil]];
 }
 

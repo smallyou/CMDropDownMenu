@@ -78,15 +78,22 @@ NSDictionary *_objectClassInArrayDict;
 /**通过plist文件创建菜单(plist格式固定)*/
 + (NSArray<CMDropMenuItem *> *)itemsWithContentsOfFile:(NSString *)path
 {
-    // 创建可变数组
-    NSMutableArray<CMDropMenuItem *> *menuItemsM = [NSMutableArray array];
-    
     // 读取数组
     NSArray *array = [NSArray arrayWithContentsOfFile:path];
     
+    // 直接调用通过字典数组创建
+    return [self itemsWithKeyValueArray:array];
+}
+
+/**通过字典数组创建菜单*/
++ (NSArray<CMDropMenuItem *> *)itemsWithKeyValueArray:(NSArray<NSDictionary *> *)array
+{
+    // 创建可变数组
+    NSMutableArray<CMDropMenuItem *> *menuItemsM = [NSMutableArray array];
+    
     // 遍历数组
     for (NSDictionary *menuDict in array) {
-     
+        
         if (![menuDict isKindOfClass:[NSDictionary class]]) {
             NSLog(@"============数据源获取失败==========");
             NSLog(@"\nitemsWithContentofFile failed -------> plist格式不一致\n");
@@ -159,7 +166,7 @@ NSDictionary *_objectClassInArrayDict;
         [self setValue:value forKey:key];
         
     }else if([value isKindOfClass:[NSArray class]]){
-        //如果是数组
+        //如果是数组 -- 如果数组中装的是字典，直接转变成CMDropDownItem模型，如果是其他类型，直接复制
         
         //转换
         NSArray *array = (NSArray *)value;
@@ -176,16 +183,15 @@ NSDictionary *_objectClassInArrayDict;
                 
                 [arrayM addObject:item];
                 
+            }else{
+                [arrayM addObject:sub];
             }
         }
         [self setValue:arrayM forKey:key];
         
         
     }else if ([value isKindOfClass:[NSDictionary class]]){
-        //如果是字典
-        
-        //--1 根据当前的属性名称key获取当前属性的类型
-        NSString *type = [CMDropMenuItem perpertyTypeWithName:key];
+        //如果是字典 -- 仅考虑当前字典是CMDropDownItem的情况
         
         NSDictionary *itemDict = (NSDictionary *)value;
         CMDropMenuItem *item = [CMDropMenuItem itemWithKeyValue:itemDict];
@@ -215,8 +221,8 @@ NSDictionary *_objectClassInArrayDict;
 }
 
 /**
- 当模型中有个数组，数组中又包含其他的模型的时候
- 字典格式： 数组的名称:对应的模型的类型    eg @{@"subItem":@"CMDropMenuItem"}
+ 当模型中有个数组属性，数组中又包含其他的模型的时候
+ 字典格式： 模型中数组的名称:对应的模型的类型    eg @{@"subItems":@"CMDropMenuItem"}
  */
 + (void)cm_setupObjectClassInArray:(NSDictionary *)dictionary
 {

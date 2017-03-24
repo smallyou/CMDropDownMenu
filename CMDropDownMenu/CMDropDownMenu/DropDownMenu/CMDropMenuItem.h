@@ -48,8 +48,7 @@
 /**通过plist文件创建菜单*/
 + (NSArray<CMDropMenuItem *> *)itemsWithContentsOfFile:(NSString *)path;
 
-/**通过NSData创建菜单*/
-+ (NSArray<CMDropMenuItem *> *)itemWithData:(NSData *)data;
+
 
 
 
@@ -61,8 +60,8 @@
 + (void)cm_setupReplacedKeyFromPropertyName:(NSDictionary *)dictionary;
 
 /**
-    当模型中有个数组，数组中又包含其他的模型的时候
-    字典格式： 数组的名称:对应的模型的类型    eg @{@"subItem":@"CMDropMenuItem"}
+ 当模型中有个数组属性，数组中又包含其他的模型的时候
+ 字典格式： 模型中数组的名称:对应的模型的类型    eg @{@"subItems":@"CMDropMenuItem"}
  */
 + (void)cm_setupObjectClassInArray:(NSDictionary *)dictionary;
 
