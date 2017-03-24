@@ -52,8 +52,11 @@
     
     
     //数据源配置
-    dropDownMenu.titleDatas = [self setupDataSourceWithPlist];  //通过格式化的plist创建
-    //dropDownMenu.titleDatas = [self setupDataSourceIgnoreSuperItem];
+    dropDownMenu.titleDatas = [self setupDataSourceWithSampleFormatJson];   //通过简单格式的json创建
+    //dropDownMenu.titleDatas = [self setupDataSourceWithSampleFormatPlist];      //通过简格式的plist创建
+    //dropDownMenu.titleDatas = [self setupDataSourceWithStandardFormatPlist];  //通过标准格式的plist创建
+    //dropDownMenu.titleDatas = [self setupDataSourceIgnoreSuperItem];  //通过手动创建忽略superItem
+    
     dropDownMenu.delegate = self;
     [self.view addSubview:dropDownMenu];
     
@@ -69,8 +72,8 @@
     
 }
 
-/**设置数据源 -- 通过格式化的plist创建*/
-- (NSArray *)setupDataSourceWithPlist
+/**设置数据源 -- 通过标准格式的plist创建*/
+- (NSArray *)setupDataSourceWithStandardFormatPlist
 {
     [CMDropMenuItem cm_setupReplacedKeyFromPropertyName:@{
                                                           @"subItem":@"subItems"
@@ -80,8 +83,28 @@
                                                  @"subItem":@"CMDropMenuItem"
                                                  }];
     
-    return [CMDropMenuItem itemsWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"menu1.plist" ofType:nil]];
+    return [CMDropMenuItem itemsWithContentsOfStandardFormatFile:[[NSBundle mainBundle] pathForResource:@"menu1.plist" ofType:nil]];
 }
+
+/**设置数据源 -- 通过简单格式的plist创建*/
+- (NSArray *)setupDataSourceWithSampleFormatPlist
+{
+    return [CMDropMenuItem itemsWithContentsOfSampleFormatFile:[[NSBundle mainBundle] pathForResource:@"menu2.plist" ofType:nil]];
+}
+
+/**设置数据源 -- 通过简单格式的json创建*/
+- (NSArray *)setupDataSourceWithSampleFormatJson
+{
+    //读取数据
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"menu2.json" ofType:nil]];
+    
+    //转换成NSArray
+    NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+    
+    //返回
+    return [CMDropMenuItem itemsWithSampleFormatKeyValueArray:array];
+}
+
 
 /**设置数据源 -- 手动创建数据源 - 忽略superItem,程序自动识别*/
 - (NSArray *)setupDataSourceIgnoreSuperItem

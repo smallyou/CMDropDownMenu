@@ -39,11 +39,11 @@ NSDictionary *_objectClassInArrayDict;
     return item;
 }
 
-/**通过字典创建模型*/
-+ (instancetype)itemWithKeyValue:(NSDictionary *)dictionary
+/**通过字典创建模型 -- 指定标准格式的字典，类似于例子中的menu1.plist所匹配的字典*/
++ (instancetype)itemWithStandardFormatKeyValue:(NSDictionary *)dictionary
 {
     //创建模型
-    CMDropMenuItem *item = [[CMDropMenuItem alloc]init];
+    CMDropMenuItem *item = [[self alloc]init];
     
     //获取模型当中的所有属性列表
     NSArray *propertys = [item cm_allPropertyNames];
@@ -74,19 +74,77 @@ NSDictionary *_objectClassInArrayDict;
     return item;
 }
 
-
-/**通过plist文件创建菜单(plist格式固定)*/
-+ (NSArray<CMDropMenuItem *> *)itemsWithContentsOfFile:(NSString *)path
+/**通过字典创建模型 -- 指定简单格式的字典，类似于例子中的menu2.plist所匹配的字典 -- 是否是默认的Item*/
++ (instancetype)itemWithSampleFormatKeyValue:(NSDictionary *)dictionary isDefaultItem:(BOOL)isDefaulItem
 {
-    // 读取数组
-    NSArray *array = [NSArray arrayWithContentsOfFile:path];
     
-    // 直接调用通过字典数组创建
-    return [self itemsWithKeyValueArray:array];
+    //创建模型
+    CMDropMenuItem *item = [[self alloc]init];
+    
+    //判断字典格式是否错误
+    NSArray *allKey = [dictionary allKeys];
+    if (allKey.count == 0) {
+        //如果字典为空，直接返回一个空的item
+        return item;
+    }
+    //取出第一个key,其他的key直接忽略,判断当前对应的value是否为数组，如果不是，直接返回，报错
+    NSString *key = allKey.firstObject;
+    id value = [dictionary valueForKey:key];
+    if (![value isKindOfClass:[NSArray class]]) {
+        NSLog(@"=============字典格式错误=============\n");
+        NSLog(@"简单格式的字典，key的value不是数组\n");
+        NSLog(@"====================================\n");
+        return item;
+    }
+    
+    //模型开始赋值
+    item.Id = 0;
+    item.title = key;
+    NSArray *subs = (NSArray *)value;
+    item.isDefaultItem = NO;
+    
+    //遍历数组
+    int i = 0;
+    NSMutableArray *subsM = [NSMutableArray array];
+    for (id sub in subs) {
+        
+        //如果是字符串的话
+        if ([sub isKindOfClass:[NSString class]]) {
+            
+            //创建模型
+            CMDropMenuItem *subItem = [[self alloc]init];
+            subItem.Id = 0;
+            subItem.title = (NSString *)sub;
+            subItem.isDefaultItem = (isDefaulItem && i == 0);
+            subItem.superItem = item;
+    
+            
+            [subsM addObject:subItem];
+            
+        }
+        //如果是字典
+        else if([sub isKindOfClass:[NSDictionary class]])
+        {
+            
+            //创建模型
+            CMDropMenuItem *item = [self itemWithSampleFormatKeyValue:(NSDictionary *)sub isDefaultItem:NO];
+            
+            //添加到数组
+            [subsM addObject:item];
+            
+        }
+        i++;
+        
+    }
+    item.subItems = subsM;
+    
+    return item;
 }
 
-/**通过字典数组创建菜单*/
-+ (NSArray<CMDropMenuItem *> *)itemsWithKeyValueArray:(NSArray<NSDictionary *> *)array
+
+
+/**通过字典数组创建菜单  --  指定标准格式的字典数组,类似于例子中的menu1.plist所匹配的字典数组*/
++ (NSArray<CMDropMenuItem *> *)itemsWithStandardFormatKeyValueArray:(NSArray<NSDictionary *> *)array
 {
     // 创建可变数组
     NSMutableArray<CMDropMenuItem *> *menuItemsM = [NSMutableArray array];
@@ -101,13 +159,63 @@ NSDictionary *_objectClassInArrayDict;
             return nil;
         }
         
-        CMDropMenuItem *item = [self itemWithKeyValue:menuDict];
+        CMDropMenuItem *item = [self itemWithStandardFormatKeyValue:menuDict];
         
         [menuItemsM addObject:item];
         
         
     }
     return menuItemsM;
+}
+
+/**通过字典数组创建菜单  --  指定简单格式的字典数组,类似于例子中的menu2.plist所匹配的字典数组*/
++ (NSArray<CMDropMenuItem *> *)itemsWithSampleFormatKeyValueArray:(NSArray<NSDictionary *> *)array
+{
+    //创建可变数组
+    NSMutableArray<CMDropMenuItem *> *menuItemM = [NSMutableArray array];
+    
+    //遍历数组
+    for (NSDictionary *menuDict in array) {
+        
+        if (![menuDict isKindOfClass:[NSDictionary class]]) {
+            
+            NSLog(@"============数据源获取失败==========");
+            NSLog(@"\nitemsWithContentofFile failed -------> plist格式不一致\n");
+            NSLog(@"=================================");
+            return nil;
+            
+        }
+        
+        //根据字典创建模型 -- 默认把第一个座位默认选项，点击后主菜单不显示
+        CMDropMenuItem *item = [self itemWithSampleFormatKeyValue:menuDict isDefaultItem:YES];
+        
+        //添加模型
+        [menuItemM addObject:item];
+    }
+    
+    
+    return menuItemM;
+}
+
+
+/**通过plist文件创建菜单 -- 指定标准格式的plist文件，如例子中的menu1.plist*/
++ (NSArray<CMDropMenuItem *> *)itemsWithContentsOfStandardFormatFile:(NSString *)path
+{
+    // 读取数组
+    NSArray *array = [NSArray arrayWithContentsOfFile:path];
+    
+    // 直接调用通过字典数组创建
+    return [self itemsWithStandardFormatKeyValueArray:array];
+}
+
+/**通过plist文件创建菜单 -- 指定简单格式的plist文件，如例子中的menu2.plist*/
++ (NSArray<CMDropMenuItem *> *)itemsWithContentsOfSampleFormatFile:(NSString *)path
+{
+    // 读取数组
+    NSArray *array = [NSArray arrayWithContentsOfFile:path];
+    
+    // 直接调用通过字典数组创建
+    return [self itemsWithSampleFormatKeyValueArray:array];
 }
 
 
@@ -178,7 +286,7 @@ NSDictionary *_objectClassInArrayDict;
                 
                 
                 NSDictionary *itemDict = (NSDictionary *)sub;
-                CMDropMenuItem *item = [CMDropMenuItem itemWithKeyValue:itemDict];
+                CMDropMenuItem *item = [CMDropMenuItem itemWithStandardFormatKeyValue:itemDict];
                 item.superItem = self;
                 
                 [arrayM addObject:item];
@@ -194,13 +302,15 @@ NSDictionary *_objectClassInArrayDict;
         //如果是字典 -- 仅考虑当前字典是CMDropDownItem的情况
         
         NSDictionary *itemDict = (NSDictionary *)value;
-        CMDropMenuItem *item = [CMDropMenuItem itemWithKeyValue:itemDict];
+        CMDropMenuItem *item = [CMDropMenuItem itemWithStandardFormatKeyValue:itemDict];
         item.superItem = self;
 
         [self setValue:item forKey:key];
     }
     
 }
+
+
 
 
 #pragma mark - 方法API

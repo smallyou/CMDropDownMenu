@@ -39,14 +39,24 @@
 /**快速创建菜单项--忽略superItem，程序自动识别*/
 + (instancetype)itemWithId:(NSInteger)Id title:(NSString *)title subItems:(NSArray<CMDropMenuItem *> *)subItems;
 
-/**通过字典创建模型*/
-+ (instancetype)itemWithKeyValue:(NSDictionary *)dictionary;
+/**通过字典创建模型 -- 指定标准格式的字典，类似于例子中的menu1.plist所匹配的字典*/
++ (instancetype)itemWithStandardFormatKeyValue:(NSDictionary *)dictionary;
 
-/**通过字典数组创建菜单*/
-+ (NSArray<CMDropMenuItem *> *)itemsWithKeyValueArray:(NSArray<NSDictionary *> *)array;
+/**通过字典创建模型 -- 指定简单格式的字典，类似于例子中的menu2.plist所匹配的字典 -- 是否是默认的Item*/
++ (instancetype)itemWithSampleFormatKeyValue:(NSDictionary *)dictionary isDefaultItem:(BOOL)isDefaulItem;
 
-/**通过plist文件创建菜单*/
-+ (NSArray<CMDropMenuItem *> *)itemsWithContentsOfFile:(NSString *)path;
+/**通过字典数组创建菜单  --  指定标准格式的字典数组,类似于例子中的menu1.plist所匹配的字典数组*/
++ (NSArray<CMDropMenuItem *> *)itemsWithStandardFormatKeyValueArray:(NSArray<NSDictionary *> *)array;
+
+/**通过字典数组创建菜单  --  指定简单格式的字典数组,类似于例子中的menu2.plist所匹配的字典数组*/
++ (NSArray<CMDropMenuItem *> *)itemsWithSampleFormatKeyValueArray:(NSArray<NSDictionary *> *)array;
+
+
+/**通过plist文件创建菜单 -- 指定标准格式的plist文件，如例子中的menu1.plist*/
++ (NSArray<CMDropMenuItem *> *)itemsWithContentsOfStandardFormatFile:(NSString *)path;
+
+/**通过plist文件创建菜单 -- 指定简单格式的plist文件，如例子中的menu2.plist*/
++ (NSArray<CMDropMenuItem *> *)itemsWithContentsOfSampleFormatFile:(NSString *)path;
 
 
 

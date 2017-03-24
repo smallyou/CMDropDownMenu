@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		543F89511E82CA9D00E56771 /* menu1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 543F89501E82CA9D00E56771 /* menu1.plist */; };
+		F7381BC51E84AFF700BA0D7C /* menu2.plist in Resources */ = {isa = PBXBuildFile; fileRef = F7381BC41E84AFF700BA0D7C /* menu2.plist */; };
+		F7381BC71E84B06C00BA0D7C /* menu2.json in Resources */ = {isa = PBXBuildFile; fileRef = F7381BC61E84B06C00BA0D7C /* menu2.json */; };
 		F7705D661E83AE3800DD6641 /* NSObject+CMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F7705D651E83AE3800DD6641 /* NSObject+CMExtension.m */; };
 		F7A3CA0B1E7B81F00025D8A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A3CA0A1E7B81F00025D8A6 /* main.m */; };
 		F7A3CA0E1E7B81F00025D8A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A3CA0D1E7B81F00025D8A6 /* AppDelegate.m */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		543F89501E82CA9D00E56771 /* menu1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = menu1.plist; sourceTree = "<group>"; };
+		F7381BC41E84AFF700BA0D7C /* menu2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = menu2.plist; sourceTree = "<group>"; };
+		F7381BC61E84B06C00BA0D7C /* menu2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = menu2.json; sourceTree = "<group>"; };
 		F7705D641E83AE3800DD6641 /* NSObject+CMExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CMExtension.h"; sourceTree = "<group>"; };
 		F7705D651E83AE3800DD6641 /* NSObject+CMExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CMExtension.m"; sourceTree = "<group>"; };
 		F7A3CA061E7B81F00025D8A6 /* CMDropDownMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CMDropDownMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +95,8 @@
 				F7A3CA1A1E7B81F00025D8A6 /* Info.plist */,
 				F7A3CA091E7B81F00025D8A6 /* Supporting Files */,
 				543F89501E82CA9D00E56771 /* menu1.plist */,
+				F7381BC41E84AFF700BA0D7C /* menu2.plist */,
+				F7381BC61E84B06C00BA0D7C /* menu2.json */,
 			);
 			path = CMDropDownMenu;
 			sourceTree = "<group>";
@@ -184,7 +190,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7A3CA191E7B81F00025D8A6 /* LaunchScreen.storyboard in Resources */,
+				F7381BC71E84B06C00BA0D7C /* menu2.json in Resources */,
 				F7A3CA161E7B81F00025D8A6 /* Assets.xcassets in Resources */,
+				F7381BC51E84AFF700BA0D7C /* menu2.plist in Resources */,
 				F7A3CA141E7B81F00025D8A6 /* Main.storyboard in Resources */,
 				543F89511E82CA9D00E56771 /* menu1.plist in Resources */,
 				F7A3CA6C1E80D87F0025D8A6 /* resource.bundle in Resources */,
