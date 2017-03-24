@@ -20,6 +20,7 @@
 /**子菜单的数据源*/
 @property(nonatomic,strong) NSMutableArray *subItemDatas;
 
+@property(nonatomic,assign) BOOL isFirstLayout;
 
 
 @end
@@ -95,6 +96,7 @@
         self.subItemDatas = [NSMutableArray arrayWithArray:[self.itemDatas.firstObject subItems]];
     }
     
+    self.isFirstLayout = YES;
     
     //菜单刷新
     [self.rootTableView reloadData];
@@ -115,14 +117,28 @@
         if (rootTableHeight > 250) {
             rootTableHeight = 250;
         }
-        self.rootTableView.frame = CGRectMake(0, 0, self.bounds.size.width / 3, rootTableHeight);
         
         //2 布局子菜单
         CGFloat subTableHeight = self.subTableView.rowHeight * self.subItemDatas.count;
         if (subTableHeight > rootTableHeight) {
             subTableHeight = rootTableHeight;
         }
-        self.subTableView.frame = CGRectMake(self.bounds.size.width / 3, 0, self.bounds.size.width * 2 / 3, subTableHeight);
+        
+        if(!self.isFirstLayout)
+        {
+            self.rootTableView.frame = CGRectMake(0, 0, self.bounds.size.width / 3, rootTableHeight);
+            self.subTableView.frame = CGRectMake(self.bounds.size.width / 3, 0, self.bounds.size.width * 2 / 3, subTableHeight);
+        }
+        else{
+            self.rootTableView.frame = CGRectMake(0, 0, self.bounds.size.width / 3, 0);
+            self.subTableView.frame = CGRectMake(self.bounds.size.width / 3, 0, self.bounds.size.width * 2 / 3, 0);
+            [UIView animateWithDuration:0.25 animations:^{
+                self.rootTableView.frame = CGRectMake(0, 0, self.bounds.size.width / 3, rootTableHeight);
+                self.subTableView.frame = CGRectMake(self.bounds.size.width / 3, 0, self.bounds.size.width * 2 / 3, subTableHeight);
+            }];
+            self.isFirstLayout = NO;
+        }
+        
         
     }
     //如果没有二级菜单
@@ -133,7 +149,11 @@
         if (rootTableHeight > 250) {
             rootTableHeight = 250;
         }
-        self.rootTableView.frame = CGRectMake(0, 0, self.bounds.size.width, rootTableHeight);
+        //self.rootTableView.frame = CGRectMake(0, 0, self.bounds.size.width, rootTableHeight);
+        self.rootTableView.frame = CGRectMake(0, 0, self.bounds.size.width, 0);
+        [UIView animateWithDuration:0.25 animations:^{
+            self.rootTableView.frame = CGRectMake(0, 0, self.bounds.size.width, rootTableHeight);
+        }];
 
     }
 }
@@ -267,6 +287,7 @@
         //刷新子菜单
         self.subItemDatas = [NSMutableArray arrayWithArray:subItems];
         [self.subTableView reloadData];
+        //[self reloadSubTableViewWithAnimation];
 
         
         
@@ -308,6 +329,40 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([tableView isEqual:self.rootTableView]) {
+        return;
+    }
+    
+    
+    NSTimeInterval timeInterval = 0;
+    if (indexPath.row == 1) {
+        timeInterval = 0.2;
+    }else if (indexPath.row == 2){
+        timeInterval = 0.4;
+    }else if (indexPath.row == 3){
+        timeInterval = 0.6;
+    }
+    
+    cell.transform = CGAffineTransformMakeTranslation(-cell.frame.size.width, 0);
+    
+    [UIView animateWithDuration:0.25 delay:timeInterval options:UIViewAnimationOptionTransitionNone animations:^{
+        
+        cell.transform = CGAffineTransformMakeTranslation(cell.frame.size.width, 0);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+
+    
+    
+}
+
+
+
+
 
 /**设置当前路径的选中状态*/
 - (void)updateSelectedFlag:(CMDropMenuItem *)item flag:(BOOL)isSelected
@@ -319,6 +374,26 @@
     [self updateSelectedFlag:item.superItem flag:isSelected];
     
 }
+
+/**动画刷新二级菜单*/
+- (void)reloadSubTableViewWithAnimation
+{
+    NSMutableArray *datasM = [NSMutableArray array];
+    for (CMDropMenuItem *item in self.subItemDatas) {
+        [datasM addObject:item];
+    }
+    [self.subItemDatas removeAllObjects];
+    [self.subTableView reloadData];
+    
+    
+    for (CMDropMenuItem *item in datasM) {
+        [self.subItemDatas addObject:item];
+        NSIndexPath *index = [NSIndexPath indexPathForRow:(self.subItemDatas.count - 1) inSection:0];
+        [self.subTableView insertRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+}
+
 
 
 
