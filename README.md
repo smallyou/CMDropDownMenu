@@ -1,4 +1,4 @@
-#CMDropDownMenu
+# CMDropDownMenu
 
 * A simple and convenient drop-down menu framework
 * 一个简单、方便的下拉菜单框架
@@ -10,22 +10,22 @@ GitHub： <a href="https://github.com/smallyou/">smallyou</a> ｜ 简书： <a h
 ![example image](CMDropDownMenu.gif)
 
 
-##1 Started(开始使用)
-###1.1 Feature(特点)
+## 1 Started(开始使用)
+### 1.1 Feature(特点)
 * 使用简单，直接init即可
 * 数据源为数组，直接赋值即可
 * 多种类型的数据源（plist/json/手动创建）
 
-###1.2 Install(安装)
-####1.2.1 cocoapods
+### 1.2 Install(安装)
+#### 1.2.1 cocoapods
 暂无不支持， 后续扩充....
-####1.2.2 手动安装
+#### 1.2.2 手动安装
 * 将项目中的 <a>CMDropDownMenu</a> 文件夹拖入到工程中
 * 引入头文件 <a>#import "CMDropDownMenu.h"</a>
 
-##2 Create DataSource(创建数据源)
+## 2 Create DataSource(创建数据源)
 
-###2.1 手动创建数据源
+### 2.1 手动创建数据源
 ```
 CMDropMenuItem *item1 = [CMDropMenuItem itemWithSuperItem:nil Id:0 title:@"全部居委" subItems:nil];
 CMDropMenuItem *item11 = [CMDropMenuItem itemWithSuperItem:item1 Id:0 title:@"全部居委" subItems:nil];
@@ -47,8 +47,8 @@ NSArray *dataTitles = @[item1, item2];
 	
 ```
 
-###2.2 标准格式的plist文件创建
-####2.2.1 plist格式
+### 2.2 标准格式的plist文件创建
+#### 2.2.1 plist格式
 * plist文件的root类型是NSArray,内部item是NSDictionary类型。
 * 字典的key一般为<a>CMDropMenuItem</a>的属性名，如果属性名不对应，可以使用类方法<a>cm_setupReplacedKeyFromPropertyName:</a>来声明。
 * 如果字典内部有NSArray属性，属性内部又包含一个模型，则可以使用类方法<a>cm_setupObjectClassInArray:</a>来声明，框架自动转换成模型数组。
@@ -57,7 +57,7 @@ NSArray *dataTitles = @[item1, item2];
 
 ![标准的plist格式](标准的plist.png)
 
-####2.2.2 加载方式
+#### 2.2.2 加载方式
 ```
 // 通过标准的plist文件创建数据源，返回数据源数组
 - (NSArray *)setupDataSourceWithStandardFormatPlist
@@ -74,9 +74,9 @@ NSArray *dataTitles = @[item1, item2];
 }
 ```
 
-###2.3 简单格式的plist文件创建
+### 2.3 简单格式的plist文件创建
 
-####2.3.1 plist的格式
+#### 2.3.1 plist的格式
 * plist的root类型是NSArray类型，数组中包含了字典。字典的key即为一级菜单。
 * 字典的value为字符串数组时，数组中的字符串即为二级菜单
 * 字典的value为字典数组时，表示有三级菜单。字典数组中的key为二级菜单，value为三级菜单
@@ -86,7 +86,7 @@ NSArray *dataTitles = @[item1, item2];
 ![简单plist格式](简单的plist.png)
 
 
-####2.3.2 加载方式
+#### 2.3.2 加载方式
 ```
 // 通过简单的plist文件创建
 - (NSArray *)setupDataSourceWithSampleFormatPlist
@@ -99,14 +99,14 @@ NSArray *dataTitles = @[item1, item2];
 
 
 
-###2.4 简单格式的json文件创建
+### 2.4 简单格式的json文件创建
 
-####2.4.1 json文件格式
+#### 2.4.1 json文件格式
 * 格式与简单的plist类似
 
 ![json格式](简单的json.png)
 
-####2.4.2 加载方式
+#### 2.4.2 加载方式
 ```
 //通过简单的json文件创建数据源,返回数据源数组
 - (NSArray *)setupDataSourceWithSampleFormatJson
@@ -123,7 +123,7 @@ NSArray *dataTitles = @[item1, item2];
 ```
 
 
-###2.5 其他API
+### 2.5 其他API
 * 可以设置菜单栏是否滚动，默认不可滚动
 * 可以设置菜单栏的字体及颜色
 * 可以设置一级子菜单的字体及颜色
@@ -135,9 +135,9 @@ NSArray *dataTitles = @[item1, item2];
 
 
 
-##3 Useage(使用)
+## 3 Useage(使用)
 
-###3.1 加载view
+### 3.1 加载view
 
 ```
 - (void)viewDidLoad
@@ -171,7 +171,7 @@ NSArray *dataTitles = @[item1, item2];
 }
 ```
 
-###3.2 获取选中路径
+### 3.2 获取选中路径
 
 * 代理返回只是最终选中的叶子节点的CMDropMenuItem模型，可以通过模型的superItem属性反向获取整体的选中路径
 
